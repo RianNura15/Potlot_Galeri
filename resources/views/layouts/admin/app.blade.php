@@ -38,6 +38,7 @@
     <script src="{{asset('public\sb_admin\vendor\jquery-easing\jquery.easing.min.js')}}"></script>
     <script src="{{asset('public\sb_admin\js\sb-admin-2.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('public\sb_admin\vendor\datatables\jquery.dataTables.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('public\sweetalert2\dist\sweetalert2.all.min.js')}}"></script>
     @stack('script')
 </body>
 </html>

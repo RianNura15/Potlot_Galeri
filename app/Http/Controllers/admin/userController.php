@@ -11,6 +11,9 @@ class userController extends Controller
     public function anggota_index(){
       return view('admin.user.anggota');
     }
+    public function customer_index(){
+      return view('admin.user.');
+    }
     public function add_anggota(Request $request){
       $insert = db::table('users')
       ->insert([
