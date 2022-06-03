@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('blog.dashboard');
 });
 
 Auth::routes();
 
-Route::namespace('admin')->prefix('admin')->name('admin.')->middleware('checkrole')->group(function(){
+Route::namespace('admin')->prefix('admin')->name('admin.')->middleware('checkrole:admin')->group(function(){
   Route::get('/home', 'HomeController@index')->name('home');
   Route::prefix('user')->name('user.')->group(function(){
     Route::get('anggota','userController@anggota_index')->name('anggota');
@@ -37,8 +37,16 @@ Route::namespace('admin')->prefix('admin')->name('admin.')->middleware('checkrol
     Route::get('tambah_index','karyaController@tambah_index')->name('tambah_index');
     Route::post('tambah','karyaController@tambah')->name('tambah');
     Route::post('delete','karyaController@delete')->name('delete');
+    Route::post('tambah_pemasar','karyaController@tambah_pemasar')->name('tambah_pemasar');
+  });
+  Route::prefix('anggota')->name('anggota.')->group(function(){
+    Route::get('get_json','anggotaController@get_json')->name('get_json');
   });
 });
 Route::namespace('blog')->prefix('blog')->name('blog.')->group(function(){
+  Route::get('index','dashboardController@index')->name('index');
   Route::get('lukisan_json','lukisanController@lukisan_json')->name('lukisan_json');
+  Route::prefix('lukisan')->name('lukisan.')->group(function(){
+    Route::get('detail','lukisanController@detail')->name('detail');
+  });
 });

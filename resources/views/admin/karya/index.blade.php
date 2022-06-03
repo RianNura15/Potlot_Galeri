@@ -4,6 +4,30 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+          <div class="modal fade" id="modalpemasar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Pilih Pemasar</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form id="form_pemasar">
+                    @csrf
+                    <input type="hidden" name="id_karya_modal">
+                    <select name="pemasar" class="form-control" style="width:100%" id="select_pemasar">
+                    </select>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" form="form_pemasar" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
             <div class="card">
                 <div class="card-body">
                   <p class="h5">Data Karya</p>
@@ -39,6 +63,30 @@
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
     })
+    $('#select_pemasar').select2({
+       ajax: {
+           url: '{{route('admin.anggota.get_json')}}',
+           dataType: "json",
+           type: "GET",
+           data: function (params) {
+
+               var queryParameters = {
+                   term: params.term
+               }
+               return queryParameters;
+           },
+           processResults: function (data) {
+               return {
+                   results: $.map(data, function (item) {
+                       return {
+                           text: item.name,
+                           id: item.id
+                       }
+                   })
+               };
+           }
+       }
+    });
     $('.table').DataTable({
       paging: true,
       lengthChange: true,
@@ -73,7 +121,7 @@
         { data: null,
           render: function ( data, type, row ) {
           return '<div class="btn-group" role="group" aria-label="Basic example">'+
-                    '<a class="btn btn-sm btn-info"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Tambah pemasar</a>'+
+                    '<button onclick="tambah_pemasar('+data.id+')" class="btn btn-sm btn-info"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Tambah pemasar</button>'+
                     '<button class="btn btn-sm btn-danger" onclick="hapus('+data.id+')"> Hapus</button>'+
                   '</div>';
         }},
@@ -110,5 +158,33 @@
         }
       })
     }
+    function tambah_pemasar(id){
+      $('#modalpemasar').modal('toggle')
+      $('[name=id_karya_modal]').val(id)
+    }
+    $('#form_pemasar').on('submit',function(e){
+      data = new FormData(this)
+      $.ajax({
+        url:'{{route('admin.karya.tambah_pemasar')}}',
+        type:'post',
+        data:data,
+        contentType: false,
+        processData: false,
+        success:function(data){
+          Toast.fire({
+            icon: 'success',
+            title: 'Berhasil menambahkan pemasar',
+          });
+          $('#modalpemasar').modal('toggle')
+          $('.table').DataTable().ajax.reload();
+        },error:function(data){
+          Toast.fire({
+            icon: 'error',
+            title: 'Gagal menambahkan pemasar',
+          });
+        }
+      })
+      e.preventDefault();
+    })
   </script>
 @endpush

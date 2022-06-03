@@ -78,6 +78,17 @@ class karyaController extends Controller
         db::rollback();
         return response()->json($e->getMessage());
       }
-
+    }
+    public function tambah_pemasar(Request $request){
+      $insert = db::table('tb_pemasar')
+      ->insert([
+        'id_gambar' => $request->id_karya_modal,
+        'id_anggota' => $request->pemasar
+      ]);
+      if ($insert == true) {
+        return response()->json('berhasil',200);
+      }else {
+        return response()->json('gagal',500);
+      }
     }
 }

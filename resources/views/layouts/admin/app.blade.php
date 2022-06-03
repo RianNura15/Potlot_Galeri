@@ -20,6 +20,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{asset('public\select2\dist\css\select2.min.css')}}" rel="stylesheet" />
+
 </head>
 <body id="page-top">
 
@@ -39,6 +41,7 @@
     <script src="{{asset('public\sb_admin\js\sb-admin-2.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('public\sb_admin\vendor\datatables\jquery.dataTables.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('public\sweetalert2\dist\sweetalert2.all.min.js')}}"></script>
+    <script src="{{asset('public\select2\dist\js\select2.min.js')}}"></script>
     @stack('script')
 </body>
 </html>
