@@ -40,6 +40,7 @@
                           <th>Gambar</th>
                           <th>Keterangan</th>
                           <th>Pemasar</th>
+                          <th>Harga</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -118,6 +119,7 @@
         {data: "gambar"},
         {data: "keterangan"},
         {data: "pemasar"},
+        {data: "harga"},
         { data: null,
           render: function ( data, type, row ) {
           return '<div class="btn-group" role="group" aria-label="Basic example">'+

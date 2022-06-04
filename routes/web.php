@@ -49,4 +49,8 @@ Route::namespace('blog')->prefix('blog')->name('blog.')->group(function(){
   Route::prefix('lukisan')->name('lukisan.')->group(function(){
     Route::get('detail','lukisanController@detail')->name('detail');
   });
+  Route::prefix('keranjang')->name('keranjang.')->group(function(){
+    Route::get('index','keranjangController@index')->name('index');
+    Route::post('tambah','keranjangController@tambah')->name('tambah');
+  });
 });

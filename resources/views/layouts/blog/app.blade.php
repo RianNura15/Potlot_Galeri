@@ -46,6 +46,7 @@
           <ul>
             <li><a class="nav-link scrollto active" href="{{route('blog.index')}}">Beranda</a></li>
             @auth
+              <li><a class="nav-link scrollto" href="{{route('blog.keranjang.index')}}">Keranjang</a></li>
               <li><a class="nav-link scrollto" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-in" aria-hidden="true"></i> Logout</a></li>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                   @csrf
@@ -158,6 +159,7 @@
   <script src="{{asset('public\bethany\assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
   <script src="{{asset('public\bethany\assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
   <script src="{{asset('public\bethany\assets/vendor/php-email-form/validate.js')}}"></script>
+  <script src="{{asset('public\sweetalert2\dist\sweetalert2.all.min.js')}}"></script>
 
   <!-- Template Main JS File -->
   <script src="{{asset('public\bethany\assets/js/main.js')}}"></script>

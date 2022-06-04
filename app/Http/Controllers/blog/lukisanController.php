@@ -33,6 +33,9 @@ class lukisanController extends Controller
     }
     public function detail(Request $request){
       $id = $request->id;
-      return view('blog.detail');
+      $get = db::table('tb_gambar')
+      ->where('id',$id)
+      ->first();
+      return view('blog.detail',compact('get'));
     }
 }

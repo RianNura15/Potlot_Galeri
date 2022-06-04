@@ -7,10 +7,10 @@
     <div class="container">
 
       <div class="d-flex justify-content-between align-items-center">
-        <h2>Portfolio Details</h2>
+        <h2>{{$get->nama}}</h2>
         <ol>
-          <li><a href="index.html">Home</a></li>
-          <li>Portfolio Details</li>
+          <li><a href="{{url('/')}}">Home</a></li>
+          <li>{{$get->nama}}</li>
         </ol>
       </div>
 
@@ -26,17 +26,8 @@
         <div class="col-lg-8">
           <div class="portfolio-details-slider swiper">
             <div class="swiper-wrapper align-items-center">
-
               <div class="swiper-slide">
-                <img src="assets/img/portfolio/portfolio-details-1.jpg" alt="">
-              </div>
-
-              <div class="swiper-slide">
-                <img src="assets/img/portfolio/portfolio-details-2.jpg" alt="">
-              </div>
-
-              <div class="swiper-slide">
-                <img src="assets/img/portfolio/portfolio-details-3.jpg" alt="">
+                <img src="{{asset('public\images')}}/{{$get->gambar}}" alt="">
               </div>
 
             </div>
@@ -46,19 +37,16 @@
 
         <div class="col-lg-4">
           <div class="portfolio-info">
-            <h3>Project information</h3>
+            <h3>Detail</h3>
             <ul>
-              <li><strong>Category</strong>: Web design</li>
-              <li><strong>Client</strong>: ASU Company</li>
-              <li><strong>Project date</strong>: 01 March, 2020</li>
-              <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+              <li><strong>Nama</strong>: {{$get->nama}}</li>
+              <li><strong>Publikasi</strong>: {{date('d-m-Y',strtotime($get->created_at))}}</li>
+              <li><strong>Harga</strong>: {{rupiah($get->harga)}}</li>
+              <li><button onclick="tambah_keranjang({{$get->id}})" class="btn btn-warning" type="button" name="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Tambahkan Troli</button> </li>
             </ul>
           </div>
           <div class="portfolio-description">
-            <h2>This is an example of portfolio detail</h2>
-            <p>
-              Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-            </p>
+            <p>{{$get->keterangan}}</p>
           </div>
         </div>
 
@@ -67,3 +55,43 @@
     </div>
   </section><!-- End Portfolio Details Section -->
 @endsection
+@push('script')
+<script type="text/javascript">
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+  function tambah_keranjang(id){
+    $.ajax({
+      url:'{{route('blog.keranjang.tambah')}}',
+      type:'post',
+      data:{
+        '_token':'{{csrf_token()}}',
+        id:id,
+        user:{{Auth::user()->id}}
+      },success:function(data){
+        Toast.fire({
+          icon: 'success',
+          title: 'Berhasil menambah keranjang',
+          text: "akan berpindah halaman",
+        });
+        setTimeout(function(){
+          window.location.href = '{{route('blog.keranjang.index')}}'
+        }, 3000);
+      },error:function(data){
+        Toast.fire({
+          icon: 'error',
+          title: data.responseJSON,
+        });
+      }
+    })
+  }
+</script>
+@endpush

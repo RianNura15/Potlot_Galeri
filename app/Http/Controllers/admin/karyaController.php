@@ -33,6 +33,7 @@ class karyaController extends Controller
           'gambar' => $value->gambar,
           'keterangan' => $value->keterangan,
           'pemasar' => $value->name,
+          'harga' => rupiah($value->harga),
           'created_at' => $value->created_at
         );
       }
