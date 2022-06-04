@@ -1,4 +1,3 @@
-
 @extends('layouts.blog.app')
 
 @section('content')
@@ -68,6 +67,7 @@ const Toast = Swal.mixin({
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   })
+  @auth
   function tambah_keranjang(id){
     $.ajax({
       url:'{{route('blog.keranjang.tambah')}}',
@@ -93,5 +93,14 @@ const Toast = Swal.mixin({
       }
     })
   }
+  @endauth
+  @guest
+    function tambah_keranjang(id){
+      Toast.fire({
+        icon: 'error',
+        title: 'Login terlebih dahulu',
+      });
+    }
+  @endguest
 </script>
 @endpush

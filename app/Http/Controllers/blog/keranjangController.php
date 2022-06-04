@@ -9,12 +9,12 @@ use Auth;
 class keranjangController extends Controller
 {
     public function index(){
-      $user = Auth::user()->id;
-      $get = db::table('tb_cart AS a')
-      ->join('tb_gambar AS b','a.id_karya','b.id')
-      ->where('id_user',$user)
-      ->get();
-      return view('blog.keranjang',compact('get'));
+        $user = Auth::user()->id;
+        $get = db::table('tb_cart AS a')
+        ->join('tb_gambar AS b','a.id_karya','b.id')
+        ->where('id_user',$user)
+        ->get();
+        return view('blog.keranjang',compact('get'));
     }
     public function tambah(Request $request){
       $id = $request->id;
@@ -23,7 +23,7 @@ class keranjangController extends Controller
       ->where('id_user',$user)
       ->where('id_karya',$id)
       ->first();
-      if (empty($check)) {
+      if (empty($check)){
         $insert = db::table('tb_cart')
         ->insert([
           'id_user' => $user,
