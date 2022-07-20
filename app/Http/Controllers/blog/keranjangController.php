@@ -11,6 +11,7 @@ class keranjangController extends Controller
     public function index(){
         $user = Auth::user()->id;
         $get = db::table('tb_cart AS a')
+        ->select('a.*','b.nama','b.harga','b.gambar')
         ->join('tb_gambar AS b','a.id_karya','b.id')
         ->where('id_user',$user)
         ->get();
@@ -35,5 +36,24 @@ class keranjangController extends Controller
       }else {
         return response()->json('Barang sudah ditambahkan',500);
       }
+    }
+    public function batal(Request $request){
+      try {
+        db::table('tb_cart')
+        ->where('id',$request->id)
+        ->where('id_user',Auth::user()->id)
+        ->delete();
+        return response()->json('berhasil');
+      } catch (\Exception $e) {
+        return response()->json($e->getMessage());
+      }
+    }
+    public function cart_id(Request $request){
+      $get = db::table('tb_cart AS a')
+      ->select('a.*','b.nama','b.harga','b.gambar')
+      ->join('tb_gambar AS b','a.id_karya','b.id')
+      ->where('a.id',$request->id)
+      ->first();
+      return response()->json($get);
     }
 }

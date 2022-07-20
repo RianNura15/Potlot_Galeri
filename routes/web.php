@@ -65,6 +65,12 @@ Route::namespace('blog')->prefix('blog')->name('blog.')->group(function(){
   Route::prefix('keranjang')->name('keranjang.')->group(function(){
     Route::get('index','keranjangController@index')->name('index');
     Route::post('tambah','keranjangController@tambah')->name('tambah');
+    Route::post('batal','keranjangController@batal')->name('batal');
+    Route::get('cart_id','keranjangController@cart_id')->name('cart_id');
+  });
+  Route::prefix('order')->name('order.')->group(function(){
+    Route::post('bayar','orderController@bayar')->name('bayar');
+    Route::get('payload','orderController@payload')->name('payload');
   });
 });
 

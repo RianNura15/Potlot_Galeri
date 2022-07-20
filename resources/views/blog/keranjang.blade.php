@@ -46,8 +46,8 @@
                   <td>{{date('d-m-Y',strtotime($value->created_at))}}</td>
                   <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                      <button type="button" class="btn btn-success">Bayar</button>
-                      <button type="button" class="btn btn-danger">Batalkan</button>
+                      <button type="button" onclick="bayar({{$value->id}})" class="btn btn-success">Bayar</button>
+                      <button onclick="batal({{$value->id}})" type="button" class="btn btn-danger">Batalkan</button>
                     </div>
                   </td>
                 </tr>
@@ -62,3 +62,66 @@
     </div>
   </section><!-- End Portfolio Details Section -->
 @endsection
+@push('script')
+  <script type="text/javascript">
+  const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    function bayar(id){
+      $.ajax({
+        url:'{{route('blog.keranjang.cart_id')}}',
+        type:'get',
+        data:{
+          id:id
+        },success:function(data){
+          console.log(data)
+          $.ajax({
+            url:'{{route('blog.order.bayar')}}',
+            type:'post',
+            data:{
+              '_token':'{{csrf_token()}}',
+              id:data.id,
+              gross_amount:data.harga,
+              name:`{{Auth::user()->name}}`,
+              email:`{{Auth::user()->email}}`,
+            },success:function(data){
+              window.open('{{route('blog.order.payload')}}?token='+data,'_blank');
+            }
+          });
+        }
+      })
+
+    }
+    function batal(id){
+      $.ajax({
+        url:'{{route('blog.keranjang.batal')}}',
+        type:'post',
+        data:{
+          '_token':'{{csrf_token()}}',
+          id:id
+        },success:function(data){
+          Toast.fire({
+            icon: 'success',
+            title: 'Daftar kerangjang dihapus',
+          });
+          setTimeout(function(){
+            location.reload();
+          }, 3000);
+        },error:function(data){
+          Toast.fire({
+            icon: 'error',
+            title: 'Gagal menghapus',
+          });
+        }
+      })
+    }
+  </script>
+@endpush
