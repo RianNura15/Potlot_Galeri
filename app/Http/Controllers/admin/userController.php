@@ -14,6 +14,23 @@ class userController extends Controller
     public function customer_index(){
       return view('admin.user.');
     }
+    public function detail_anggota(Request $request){
+      $get = db::table('users')->where('id',$request->id)
+      ->first();
+      return response()->json($get);
+    }
+    public function edit(Request $request){
+      try {
+        db::table('users')->where('id',$request->id_edit)
+        ->update([
+          'name' => $request->nama_edit,
+          'email' => $request->email_edit
+        ]);
+        return response()->json('berhasil');
+      } catch (\Exception $e) {
+        return response()->json($e->getMessage());
+      }
+    }
     public function add_anggota(Request $request){
       $insert = db::table('users')
       ->insert([

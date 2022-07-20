@@ -4,7 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card shadow">
+              @include('admin.user.modal_detail')
               <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
@@ -91,12 +92,26 @@
         { data: null,
           render: function ( data, type, row ) {
           return '<div class="btn-group" role="group" aria-label="Basic example">'+
-                    '<a class="btn btn-sm btn-info"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Detail Anggota</a>'+
+                    '<button onclick="detail('+data.id+')" class="btn btn-sm btn-info"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Detail Anggota</button>'+
                     '<button class="btn btn-sm btn-danger" onclick="hapus('+data.id+')"> Hapus</button>'+
                   '</div>';
         }},
       ]
     });
+    function detail(id){
+      $.ajax({
+        url:'{{route('admin.user.detail_anggota')}}',
+        type:'get',
+        data:{
+          id:id
+        },success:function(data){
+          $('#modal_detail').modal('show');
+          $('[name=id_edit]').val(data.id)
+          $('[name=nama_edit]').val(data.name)
+          $('[name=email_edit]').val(data.email)
+        }
+      })
+    }
     function simpan(){
       data = $('form').serializeArray();
       $.ajax({
@@ -111,6 +126,21 @@
         }
       })
     }
+    $('#edit').on('submit',function(e){
+      e.preventDefault();
+      var data = new FormData(this)
+      $.ajax({
+        url:'{{route('admin.user.edit')}}',
+        type:'post',
+        processData:false,
+        contentType:false,
+        data:data,
+        success:function(data){
+          $('.table').DataTable().ajax.reload();
+          $('#modal_detail').modal('hide');
+        }
+      })
+    });
     function hapus(id){
       $.ajax({
         url:'{{route('admin.user.delete_anggota')}}',
