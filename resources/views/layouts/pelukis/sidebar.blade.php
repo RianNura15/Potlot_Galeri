@@ -35,11 +35,17 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{route('pelukis.karya.index')}}">List Data</a>
-                <a class="collapse-item" href="{{route('admin.karya.tambah_index')}}">Tambah Lukisan</a>
+                <a class="collapse-item" href="{{route('pelukis.karya.tambah_index')}}">Tambah Lukisan</a>
             </div>
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('pelukis.karya.index')}}">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Komisi</span>
+        </a>
+    </li>
     <!-- Nav Item - Charts -->
     {{-- <li class="nav-item">
         <a class="nav-link" href="charts.html">

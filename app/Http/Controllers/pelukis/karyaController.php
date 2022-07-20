@@ -10,6 +10,10 @@ class karyaController extends Controller
     public function index(){
       return view('pelukis.karya.index');
     }
+    public function tambah_index(){
+      return view('pelukis.karya.tambah');
+    }
+
     public function get_data(Request $request){
       $limit = is_null($request["length"]) ? 10 : $request["length"];
       $offset = is_null($request["start"]) ? 0 : $request["start"];
@@ -48,5 +52,37 @@ class karyaController extends Controller
       $recordsTotal = is_null($get_count) ? 0 : $get_count;
       $recordsFiltered = is_null($get_count) ? 0 : $get_count;
       return response()->json(compact("data", "draw", "recordsTotal", "recordsFiltered"));
+    }
+    public function tambah(Request $request){
+      $request->validate([
+        'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      ]);
+      try {
+        $imageName = time().'.'.$request->file->extension();
+        $request->file->move(public_path('images'), $imageName);
+        db::table('tb_gambar')
+        ->insert([
+          'gambar' => $imageName,
+          'nama' => $request->nama,
+          'keterangan' => $request->keterangan,
+          'harga' => $request->harga,
+          'id_pelukis' => $request->id_pelukis
+        ]);
+        return response()->json('berhasil',200);
+      } catch (\Exception $e) {
+        return response()->json($e->getMessage());
+      }
+    }
+    public function hapus(Request $request){
+      try {
+        db::table('tb_gambar')
+        ->where('id',$request->id)
+        ->where('id_pelukis',Auth::user()->id)
+        ->delete();
+        return response()->json('berhasil');
+      } catch (\Exception $e) {
+        return response()->json($e->getMessage());
+      }
+
     }
 }

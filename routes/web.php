@@ -74,5 +74,11 @@ Route::namespace('pelukis')->prefix('pelukis')->name('pelukis.')->middleware('ch
   Route::prefix('karya')->name('karya.')->group(function(){
     Route::get('index','karyaController@index')->name('index');
     Route::get('get_data','karyaController@get_data')->name('get_data');
+    Route::get('tambah_index','karyaController@tambah_index')->name('tambah_index');
+    Route::post('tambah','karyaController@tambah')->name('tambah');
+    Route::post('hapus','karyaController@hapus')->name('hapus');
+  });
+  Route::prefix('komisi')->name('komisi')->group(function(){
+    Route::get('index','komisiController@index')->name('index');
   });
 });

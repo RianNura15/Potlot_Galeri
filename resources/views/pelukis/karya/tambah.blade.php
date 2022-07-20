@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.pelukis.app')
 
 @section('content')
 <div class="container">
@@ -35,6 +35,7 @@
                           <input type="number" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="harga">
                         </div>
                       </div>
+                      <input type="hidden" name="id_pelukis" value="{{Auth::user()->id}}">
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                   </form>
@@ -67,7 +68,7 @@
       let formData = new FormData(this);
       $.ajax({
          type:'POST',
-         url: '{{route('admin.karya.tambah')}}',
+         url: '{{route('pelukis.karya.tambah')}}',
           data: formData,
           contentType: false,
           processData: false,
@@ -78,7 +79,7 @@
               text: "akan berpindah halaman",
             });
             setTimeout(function(){
-              window.location.href = '{{route('admin.karya.index')}}'
+              window.location.href = '{{route('pelukis.karya.index')}}'
             }, 3000);
           },
           error: function(response){
@@ -89,7 +90,6 @@
           }
       });
       e.preventDefault();
-
  });
 
   </script>
