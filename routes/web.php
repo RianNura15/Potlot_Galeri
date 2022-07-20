@@ -67,3 +67,12 @@ Route::namespace('blog')->prefix('blog')->name('blog.')->group(function(){
     Route::post('tambah','keranjangController@tambah')->name('tambah');
   });
 });
+
+Route::namespace('pelukis')->prefix('pelukis')->name('pelukis.')->middleware('checkrole:pelukis')->group(function(){
+  Route::get('home','dahsboardController@home')->name('home');
+
+  Route::prefix('karya')->name('karya.')->group(function(){
+    Route::get('index','karyaController@index')->name('index');
+    Route::get('get_data','karyaController@get_data')->name('get_data');
+  });
+});

@@ -25,19 +25,19 @@
 
   <div id="wrapper">
 
-        @include('layouts.admin.sidebar')
+        @include('layouts.pelukis.sidebar')
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-              @include('layouts.admin.navbar')
+              @include('layouts.pelukis.navbar')
               @yield('content')
             </div>
           </div>
     </div>
     <script src="{{asset('public\sb_admin\vendor\jquery\jquery.min.js')}}"></script>
-    <script src="{{asset('public\sb_admin\vendor\datatables\jquery.dataTables.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('public\sb_admin\vendor\bootstrap\js\bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('public\sb_admin\vendor\jquery-easing\jquery.easing.min.js')}}"></script>
     <script src="{{asset('public\sb_admin\js\sb-admin-2.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('public\sb_admin\vendor\datatables\jquery.dataTables.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('public\sweetalert2\dist\sweetalert2.all.min.js')}}"></script>
     <script src="{{asset('public\select2\dist\js\select2.min.js')}}"></script>
     <script type="text/javascript">
