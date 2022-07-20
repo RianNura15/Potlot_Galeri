@@ -28,6 +28,9 @@ Route::namespace('admin')->prefix('admin')->name('admin.')->middleware('checkrol
     Route::post('delete_anggota','userController@delete_anggota')->name('delete_anggota');
     Route::get('detail_anggota','userController@detail_anggota')->name('detail_anggota');
     Route::post('edit','userController@edit')->name('edit');
+
+    Route::get('get_pelukis','userController@get_pelukis')->name('get_pelukis');
+    Route::post('add_pelukis','userController@add_pelukis')->name('add_pelukis');
   });
   Route::prefix('customer')->name('customer.')->group(function(){
     Route::get('customer_index','userController@customer_index')->name('customer_index');
@@ -41,6 +44,9 @@ Route::namespace('admin')->prefix('admin')->name('admin.')->middleware('checkrol
     Route::post('delete','karyaController@delete')->name('delete');
     Route::post('tambah_pemasar','karyaController@tambah_pemasar')->name('tambah_pemasar');
     Route::get('data_karya','karyaController@data_karya')->name('data_karya');
+  });
+  Route::prefix('pelukis')->name('pelukis.')->group(function(){
+    Route::get('index','pelukisController@index')->name('index');
   });
   Route::prefix('promo')->name('promo.')->group(function(){
     Route::get('index','promoController@index')->name('index');
