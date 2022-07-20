@@ -17,11 +17,13 @@
                   <form id="form_promo">
                     @csrf
                     <input type="hidden" name="id_karya">
-                    <p>Harga Karya : <f id="harga_karya"></f></p>
+                    <p>Harga Karya : <strong><f class="text-success" id="harga_karya"></f></strong></p>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Harga</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+                      <label for="exampleInputEmail1">Promo (%)</label>
+                      <input type="number" name="promo" onkeyup="add_promo(this)" class="form-control" id="exampleInputEmail1">
                     </div>
+                    <p>Harga Akhir : <strong><f class="text-primary" id="harga_akhir"></f></strong></p>
+                    <input type="hidden" name="harga_akhir">
                   </form>
                 </div>
                 <div class="modal-footer">
@@ -41,9 +43,9 @@
                           <th>No.</th>
                           <th>Nama</th>
                           <th>Gambar</th>
-                          <th>Keterangan</th>
                           <th>Pemasar</th>
                           <th>Harga</th>
+                          <th>Harga Promo</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -67,30 +69,7 @@
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
     })
-    $('#select_pemasar').select2({
-       ajax: {
-           url: '{{route('admin.anggota.get_json')}}',
-           dataType: "json",
-           type: "GET",
-           data: function (params) {
-
-               var queryParameters = {
-                   term: params.term
-               }
-               return queryParameters;
-           },
-           processResults: function (data) {
-               return {
-                   results: $.map(data, function (item) {
-                       return {
-                           text: item.name,
-                           id: item.id
-                       }
-                   })
-               };
-           }
-       }
-    });
+    var harga_karya,harga_akhir;
     $('.table').DataTable({
       paging: true,
       lengthChange: true,
@@ -120,9 +99,9 @@
         },
         {data: "nama"},
         {data: "gambar"},
-        {data: "keterangan"},
         {data: "pemasar"},
         {data: "harga"},
+        {data: "harga_akhir"},
         { data: null,
           render: function ( data, type, row ) {
           return '<div class="btn-group" role="group" aria-label="Basic example">'+
@@ -139,10 +118,46 @@
           id:id
         },success:function(data){
           $('#modal_promo').modal('show');
-          $('#harga_karya').html(rupiah(data.harga))
+          $('#harga_karya').html(rupiah(parseFloat(data.harga)))
+          harga_karya = parseFloat(data.harga);
+          harga_akhir = harga_karya;
+          $('#harga_akhir').html(rupiah(harga_karya))
+          $('[name=id_karya]').val(data.id)
         }
       })
     }
+    function add_promo(e){
+      value = e.value
+      potongan = (value/100)*harga_karya
+      harga_akhir = (harga_karya-potongan)
+      $('#harga_akhir').html(rupiah(harga_akhir))
+      $('[name=harga_akhir]').val(harga_akhir);
+    }
+    $('#form_promo').on('submit',function(e){
+      e.preventDefault();
+      data = new FormData(this);
+      $.ajax({
+        url:'{{route('admin.promo.add_promo')}}',
+        type:'post',
+        processData:false,
+        contentType:false,
+        data:data,
+        success:function(data){
+          $('#modal_promo').modal('hide');
+          document.getElementById('form_promo').reset();
+          $('.table').DataTable().ajax.reload();
+          Toast.fire({
+            icon: 'success',
+            title: 'Berhasil menambah promo',
+          });
+        },error:function(data){
+          Toast.fire({
+            icon: 'error',
+            title: 'Gagal menambah promo',
+          });
+        }
+      });
+    })
     function simpan(){
       data = $('form').serializeArray();
       $.ajax({

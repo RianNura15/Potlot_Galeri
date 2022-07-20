@@ -44,6 +44,7 @@ Route::namespace('admin')->prefix('admin')->name('admin.')->middleware('checkrol
   });
   Route::prefix('promo')->name('promo.')->group(function(){
     Route::get('index','promoController@index')->name('index');
+    Route::post('add_promo','promoController@add_promo')->name('add_promo');
   });
   Route::prefix('anggota')->name('anggota.')->group(function(){
     Route::get('get_json','anggotaController@get_json')->name('get_json');

@@ -17,9 +17,10 @@ class karyaController extends Controller
       $search = $request->search['value'];
       $data = [];
       $result = DB::table('tb_gambar AS a')
-      ->select('a.*','c.name')
+      ->select('a.*','c.name','p.harga_akhir')
       ->leftJoin('tb_pemasar AS b','a.id','b.id_gambar')
-      ->leftJoin('users AS c','c.id','b.id_anggota');
+      ->leftJoin('users AS c','c.id','b.id_anggota')
+      ->leftjoin('promo AS p','p.id_karya','a.id');
       if (!empty($search)) {
         $result = $result->where('nama','LIKE','%'.$search.'%')
         ->orwhere('keterangan','LIKE','%'.$search.'%')
@@ -39,6 +40,7 @@ class karyaController extends Controller
           'keterangan' => $value->keterangan,
           'pemasar' => $value->name,
           'harga' => rupiah($value->harga),
+          'harga_akhir' => rupiah($value->harga_akhir),
           'created_at' => $value->created_at
         );
       }
