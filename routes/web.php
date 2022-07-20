@@ -28,10 +28,10 @@ Route::namespace('admin')->prefix('admin')->name('admin.')->middleware('checkrol
     Route::post('delete_anggota','userController@delete_anggota')->name('delete_anggota');
     Route::get('detail_anggota','userController@detail_anggota')->name('detail_anggota');
     Route::post('edit','userController@edit')->name('edit');
-
-    Route::prefix('customer')->name('customer.')->group(function(){
-      Route::get('customer_index','userController@customer_index')->name('customer_index');
-    });
+  });
+  Route::prefix('customer')->name('customer.')->group(function(){
+    Route::get('customer_index','userController@customer_index')->name('customer_index');
+    Route::get('get_customer','userController@get_customer')->name('get_customer');
   });
   Route::prefix('karya')->name('karya.')->group(function(){
     Route::get('index','karyaController@index')->name('index');
