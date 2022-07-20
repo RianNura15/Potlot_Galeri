@@ -4,33 +4,36 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-          <div class="modal fade" id="modalpemasar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal fade" id="modal_promo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">Pilih Pemasar</h5>
+                  <h5 class="modal-title" id="exampleModalLongTitle">Buat Promo Untuk Karya Seni</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form id="form_pemasar">
+                  <form id="form_promo">
                     @csrf
-                    <input type="hidden" name="id_karya_modal">
-                    <select name="pemasar" class="form-control" style="width:100%" id="select_pemasar">
-                    </select>
+                    <input type="hidden" name="id_karya">
+                    <p>Harga Karya : <f id="harga_karya"></f></p>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Harga</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+                    </div>
                   </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" form="form_pemasar" class="btn btn-primary">Save changes</button>
+                  <button type="submit" form="form_promo" class="btn btn-primary">Save changes</button>
                 </div>
               </div>
             </div>
           </div>
             <div class="card shadow">
                 <div class="card-body">
-                  <p class="h5">Data Karya</p>
+                  <p class="h5">Daftar Promo</p>
                   <hr>
                     <table class="table" width="100%">
                       <thead>
@@ -123,12 +126,23 @@
         { data: null,
           render: function ( data, type, row ) {
           return '<div class="btn-group" role="group" aria-label="Basic example">'+
-                    '<button onclick="tambah_pemasar('+data.id+')" class="btn btn-sm btn-info"><i class="fa fa-folder-open-o" aria-hidden="true"></i>Pemasar</button>'+
-                    '<button class="btn btn-sm btn-danger" onclick="hapus('+data.id+')"> Hapus</button>'+
+                    '<button type="button" onclick="buat_promo('+data.id+')" class="btn btn-success" name="button">Promo</button>'+
                   '</div>';
         }},
       ]
     });
+    function buat_promo(id){
+      $.ajax({
+        url:'{{route('admin.karya.data_karya')}}',
+        type:'get',
+        data:{
+          id:id
+        },success:function(data){
+          $('#modal_promo').modal('show');
+          $('#harga_karya').html(rupiah(data.harga))
+        }
+      })
+    }
     function simpan(){
       data = $('form').serializeArray();
       $.ajax({

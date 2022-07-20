@@ -40,6 +40,10 @@ Route::namespace('admin')->prefix('admin')->name('admin.')->middleware('checkrol
     Route::post('tambah','karyaController@tambah')->name('tambah');
     Route::post('delete','karyaController@delete')->name('delete');
     Route::post('tambah_pemasar','karyaController@tambah_pemasar')->name('tambah_pemasar');
+    Route::get('data_karya','karyaController@data_karya')->name('data_karya');
+  });
+  Route::prefix('promo')->name('promo.')->group(function(){
+    Route::get('index','promoController@index')->name('index');
   });
   Route::prefix('anggota')->name('anggota.')->group(function(){
     Route::get('get_json','anggotaController@get_json')->name('get_json');

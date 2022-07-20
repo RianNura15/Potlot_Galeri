@@ -61,6 +61,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{route('admin.karya.index')}}">List Data</a>
                 <a class="collapse-item" href="{{route('admin.karya.tambah_index')}}">Tambah Lukisan</a>
+                <a class="collapse-item" href="{{route('admin.promo.index')}}">Harga Promo</a>
             </div>
         </div>
     </li>

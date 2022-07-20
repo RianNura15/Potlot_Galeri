@@ -20,6 +20,11 @@ class karyaController extends Controller
       ->select('a.*','c.name')
       ->leftJoin('tb_pemasar AS b','a.id','b.id_gambar')
       ->leftJoin('users AS c','c.id','b.id_anggota');
+      if (!empty($search)) {
+        $result = $result->where('nama','LIKE','%'.$search.'%')
+        ->orwhere('keterangan','LIKE','%'.$search.'%')
+        ->orwhere('c.name','LIKE','%'.$search.'%');
+      }
       $get_count = $result->get()->count();
       $result = $result
       ->limit($limit)
@@ -92,4 +97,8 @@ class karyaController extends Controller
         return response()->json('gagal',500);
       }
     }
+  public function data_karya(Request $request){
+    $get = db::table('tb_gambar')->where('id',$request->id)->first();
+    return response()->json($get);
+  }
 }

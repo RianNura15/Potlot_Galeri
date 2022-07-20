@@ -40,6 +40,25 @@
     <script src="{{asset('public\sb_admin\vendor\datatables\jquery.dataTables.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('public\sweetalert2\dist\sweetalert2.all.min.js')}}"></script>
     <script src="{{asset('public\select2\dist\js\select2.min.js')}}"></script>
+    <script type="text/javascript">
+    function rupiah(angka){
+      let prefix = 'Rp. ';
+      var number_string = angka.replace(/[^,\d]/g, '').toString(),
+      split   		= number_string.split(','),
+      sisa     		= split[0].length % 3,
+      rupiah     		= split[0].substr(0, sisa),
+      ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+      // tambahkan titik jika yang di input sudah menjadi angka ribuan
+      if(ribuan){
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+      }
+
+      rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+      return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+      }
+    </script>
     @stack('script')
 </body>
 </html>
