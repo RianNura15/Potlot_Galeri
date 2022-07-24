@@ -208,7 +208,7 @@
     <!-- page-body-wrapper ends -->
   </div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Vendor JS Files -->
   <script src="{{asset('public/template/vendors/js/vendor.bundle.base.js')}}"></script>
   <!-- endinject -->
