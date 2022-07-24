@@ -207,28 +207,6 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-  <!-- ======= Header ======= -->
-  {{-- <header id="header" class="fixed-top d-flex align-items-center">
-    <div class="container">
-      <div class="header-container d-flex align-items-center justify-content-between">
-        <div class="logo">
-          <h1 class="text-light"><a href="{{url('/home')}}"><span>POTLOT GALERI</span></a></h1>
-          <!-- Uncomment below if you prefer to use an image logo -->
-          <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        </div>
-
-        <!-- .navbar -->
-
-      </div><!-- End Header Container -->
-    </div>
-  </header><!-- End Header --> --}}
-
-  <!-- ======= Hero Section ======= -->
-
-
-
-
-
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->

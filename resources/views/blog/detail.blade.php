@@ -1,58 +1,31 @@
 @extends('layouts.blog.app')
 
 @section('content')
-  <!-- ======= Breadcrumbs ======= -->
-  <section id="breadcrumbs" class="breadcrumbs">
-    <div class="container">
-
-      <div class="d-flex justify-content-between align-items-center">
-        <h2>{{$get->nama}}</h2>
-        <ol>
-          <li><a href="{{url('/')}}">Home</a></li>
-          <li>{{$get->nama}}</li>
-        </ol>
-      </div>
-
-    </div>
-  </section><!-- End Breadcrumbs -->
-
-  <!-- ======= Portfolio Details Section ======= -->
-  <section id="portfolio-details" class="portfolio-details">
-    <div class="container">
-
-      <div class="row gy-4">
-
-        <div class="col-lg-8">
-          <div class="portfolio-details-slider swiper">
-            <div class="swiper-wrapper align-items-center">
-              <div class="swiper-slide">
-                <img src="{{asset('public\images')}}/{{$get->gambar}}" alt="">
-              </div>
-
-            </div>
-            <div class="swiper-pagination"></div>
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="portfolio-details-slider swiper">
+        <div class="swiper-wrapper align-items-center">
+          <div class="swiper-slide" style="background-image: url({{asset('public/images')}}/{{$get->gambar}})">
           </div>
+
         </div>
-
-        <div class="col-lg-4">
-          <div class="portfolio-info">
-            <h3>Detail</h3>
-            <ul>
-              <li><strong>Nama</strong>: {{$get->nama}}</li>
-              <li><strong>Publikasi</strong>: {{date('d-m-Y',strtotime($get->created_at))}}</li>
-              <li><strong>Harga</strong>: {{rupiah($get->harga)}}</li>
-              <li><button onclick="tambah_keranjang({{$get->id}})" class="btn btn-warning" type="button" name="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Tambahkan Troli</button> </li>
-            </ul>
-          </div>
-          <div class="portfolio-description">
-            <p>{{$get->keterangan}}</p>
-          </div>
-        </div>
-
+        <div class="swiper-pagination"></div>
       </div>
-
     </div>
-  </section><!-- End Portfolio Details Section -->
+
+    <div class="col-lg-4">
+      <div class="portfolio-info">
+        <h3>Detail</h3>
+          <p><strong>Nama</strong>: {{$get->nama}}</p>
+          <p><strong>Publikasi</strong>: {{date('d-m-Y',strtotime($get->created_at))}}</p>
+          <p><strong>Harga</strong>: {{rupiah($get->harga)}}</p>
+          <p><button onclick="tambah_keranjang({{$get->id}})" class="btn btn-warning" type="button" name="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Tambahkan Troli</button></p>
+      </div>
+      <div class="portfolio-description">
+        <p>{{$get->keterangan}}</p>
+      </div>
+    </div>
+  </div>
 @endsection
 @push('script')
 <script type="text/javascript">
