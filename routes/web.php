@@ -72,6 +72,10 @@ Route::namespace('blog')->prefix('blog')->name('blog.')->group(function(){
     Route::post('bayar','orderController@bayar')->name('bayar');
     Route::get('payload','orderController@payload')->name('payload');
   });
+
+  Route::prefix('custom')->name('custom.')->group(function(){
+    Route::get('index','customController@index')->name('index');
+  });
 });
 
 Route::namespace('pelukis')->prefix('pelukis')->name('pelukis.')->middleware('checkrole:pelukis')->group(function(){
@@ -86,5 +90,12 @@ Route::namespace('pelukis')->prefix('pelukis')->name('pelukis.')->middleware('ch
   });
   Route::prefix('komisi')->name('komisi')->group(function(){
     Route::get('index','komisiController@index')->name('index');
+  });
+});
+
+Route::namespace('pemilik')->prefix('pemilik')->name('pemilik.')->middleware('checkrole:pemilik')->group(function(){
+  Route::get('index','HomeController@index')->name('index');
+  Route::prefix('admin')->name('admin.')->group(function(){
+    Route::get('index','adminController@index')->name('index');
   });
 });

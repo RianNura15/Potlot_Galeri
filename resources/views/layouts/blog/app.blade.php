@@ -208,9 +208,9 @@
     <!-- page-body-wrapper ends -->
   </div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Vendor JS Files -->
-  <script src="{{asset('public/template/vendors/js/vendor.bundle.base.js')}}"></script>
+  <script src="{{asset('public/template/vendors/js/vendor.base.js')}}"></script>
+  <script src="{{asset('public/template/js/jquery.cookie.js')}}" type="text/javascript')}}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <script src="{{asset('public/template/vendors/chart.js/Chart.min.js')}}"></script>
@@ -226,9 +226,12 @@
   <script src="{{asset('public/template/js/todolist.js')}}"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="{{asset('public/template/js/jquery.cookie.js" type="text/javascript')}}"></script>
   <script src="{{asset('public/template/js/dashboard.js')}}"></script>
   <script src="{{asset('public/template/js/Chart.roundedBarCharts.js')}}"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="text/javascript">
+    li.classList.remove("active");
+  </script>
 
   @stack('script')
 </body>
