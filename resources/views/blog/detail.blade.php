@@ -5,9 +5,9 @@
     <div class="col-lg-8">
       <div class="portfolio-details-slider swiper">
         <div class="swiper-wrapper align-items-center">
-          <div class="swiper-slide" style="background-image: url({{asset('public/images')}}/{{$get->gambar}})">
+          <div class="swiper-slide">
+            <img src="{{asset('public/images')}}/{{$get->gambar}}" width="350px" height="500px">
           </div>
-
         </div>
         <div class="swiper-pagination"></div>
       </div>
