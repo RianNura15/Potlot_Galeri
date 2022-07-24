@@ -17,9 +17,13 @@
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-top">
     <ul class="navbar-nav">
+      @php
+      $hour = date('H',strtotime('+7 hour'));
+      $dayTerm = ($hour > 17) ? "Malam" : (($hour > 12) ? "Sore" : "Pagi");
+      @endphp
       <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-        <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>
-        <h3 class="welcome-sub-text">Your performance summary this week </h3>
+        <h1 class="welcome-text">Selamat {{$dayTerm}}, <span class="text-black fw-bold">{{Auth::user()->name}}</span></h1>
+        <h3 class="welcome-sub-text">Coba periksa beberapa lukisan kami </h3>
       </li>
     </ul>
     <ul class="navbar-nav ms-auto">
