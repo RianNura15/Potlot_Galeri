@@ -97,5 +97,6 @@ Route::namespace('pemilik')->prefix('pemilik')->name('pemilik.')->middleware('ch
   Route::get('index','HomeController@index')->name('index');
   Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('index','adminController@index')->name('index');
+    Route::get('get_data','adminController@get_data')->name('get_data');
   });
 });
