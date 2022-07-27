@@ -71,4 +71,78 @@ class gambarController extends Controller
       return response()->json($e->getMessage());
     }
   }
+  public function index_promo(){
+    return view('marketing.gambar.promo');
+  }
+  public function get_promo(Request $request){
+    $limit = is_null($request["length"]) ? 10 : $request["length"];
+    $offset = is_null($request["start"]) ? 0 : $request["start"];
+    $draw = $request["draw"];
+    $search = $request->search['value'];
+    $data = [];
+    $result = DB::table('tb_gambar AS a')
+    ->select('a.*','c.name','p.harga_akhir')
+    ->leftJoin('tb_pemasar AS b','a.id','b.id_gambar')
+    ->leftJoin('users AS c','c.id','b.id_anggota')
+    ->leftjoin('promo AS p','p.id_karya','a.id')
+    ->where('b.id_anggota',$request->id_user);
+    if (!empty($search)) {
+      $result = $result->where('nama','LIKE','%'.$search.'%')
+      ->orwhere('keterangan','LIKE','%'.$search.'%')
+      ->orwhere('c.name','LIKE','%'.$search.'%');
+    }
+    $get_count = $result->get()->count();
+    $result = $result
+    ->limit($limit)
+    ->offset($offset)
+    ->orderBy('created_at','DESC')
+    ->get();
+    foreach ($result as $key => $value) {
+      $data[] = array(
+        'id' => $value->id,
+        'nama' => $value->nama,
+        'gambar' => $value->gambar,
+        'keterangan' => $value->keterangan,
+        'pemasar' => $value->name,
+        'harga' => rupiah($value->harga),
+        'harga_akhir' => rupiah($value->harga_akhir),
+        'created_at' => $value->created_at
+      );
+    }
+    $recordsTotal = is_null($get_count) ? 0 : $get_count;
+    $recordsFiltered = is_null($get_count) ? 0 : $get_count;
+    return response()->json(compact("data", "draw", "recordsTotal", "recordsFiltered"));
+  }
+  public function add_promo(Request $request){
+    try {
+      $check = db::table('promo')
+      ->where('id_karya',$request->id_karya)
+      ->first();
+      if (!empty($check)) {
+        db::table('promo')
+        ->where('id_karya',$request->id_karya)
+        ->update([
+          'potongan' => $request->promo,
+          'harga_akhir' => $request->harga_akhir,
+          'created_at' => date('Y-m-d H:i:s')
+        ]);
+      }else {
+        db::table('promo')
+        ->insert([
+          'id_karya' => $request->id_karya,
+          'potongan' => $request->promo,
+          'harga_akhir' => $request->harga_akhir,
+          'created_at' => date('Y-m-d H:i:s')
+        ]);
+      }
+      return response()->json('berhasil');
+    } catch (\Exception $e) {
+      return response()->json($e->getMessage());
+    }
+
+  }
+  public function data_karya(Request $request){
+    $get = db::table('tb_gambar')->where('id',$request->id)->first();
+    return response()->json($get);
+  }
 }

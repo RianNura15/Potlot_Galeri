@@ -119,9 +119,11 @@ Route::namespace('marketing')->prefix('marketing')->name('marketing.')->middlewa
   Route::prefix('gambar')->name('gambar.')->group(function(){
     Route::get('index','gambarController@index')->name('index');
     Route::get('tambah_index','gambarController@tambah_index')->name('tambah_index');
-    Route::get('promo','gambarController@promo')->name('promo');
-
+    Route::get('index_promo','gambarController@index_promo')->name('index_promo');
+    Route::post('add_promo','gambarController@add_promo')->name('add_promo');
+    Route::get('get_promo','gambarController@get_promo')->name('get_promo');
     Route::get('get_data','gambarController@get_data')->name('get_data');
     Route::post('tambah','gambarController@tambah')->name('tambah');
+    Route::get('data_karya','gambarController@data_karya')->name('data_karya');
   });
 });

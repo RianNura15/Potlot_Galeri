@@ -88,7 +88,7 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" href="{{route('marketing.gambar.index')}}">List Data</a>
         <a class="collapse-item" href="{{route('marketing.gambar.tambah_index')}}">Tambah Lukisan</a>
-        <a class="collapse-item" href="{{route('marketing.gambar.promo')}}">Harga Promo</a>
+        <a class="collapse-item" href="{{route('marketing.gambar.index_promo')}}">Harga Promo</a>
       </div>
     </div>
   </li>
