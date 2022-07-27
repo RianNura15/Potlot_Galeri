@@ -51,9 +51,11 @@ class orderController extends Controller
       }
     }
     public function payload(Request $request){
-      $token = $request->token;
-      $id_cart = $request->id_cart;
-      return view('blog.showpay',compact('token','id_cart'));
+      $data = [
+        'token' => $request->token,
+        'id_cart' => $request->id_cart,
+      ];
+      return view('blog.showpay',compact('data'));
     }
     public function status(Request $request){
       $get = db::table('tb_cart')
@@ -63,7 +65,7 @@ class orderController extends Controller
       db::beginTransaction();
       try {
         $tb_order = db::table('tb_order')
-        ->insert([
+        ->insertGetId([
           'tb_gambar_id' => $get->id_karya,
           'users_id' => $get->id_user,
           'status' => 'Lunas'
@@ -78,6 +80,11 @@ class orderController extends Controller
           'transaction_status' => $data->transaction_status,
           'transaction_time' => $data->transaction_time,
           'tb_order_id' => $tb_order,
+        ]);
+        db::table('tb_gambar')
+        ->where('id',$get->id_karya)
+        ->update([
+          'status' => 'dibeli'
         ]);
         db::commit();
         return response()->json('berhasil');

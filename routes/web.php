@@ -55,6 +55,10 @@ Route::namespace('admin')->prefix('admin')->name('admin.')->middleware('checkrol
   Route::prefix('anggota')->name('anggota.')->group(function(){
     Route::get('get_json','anggotaController@get_json')->name('get_json');
   });
+  Route::prefix('pembayaran')->name('pembayaran.')->group(function(){
+    Route::get('index','pembayaranController@index')->name('index');
+    Route::get('get_data','pembayaranController@get_data')->name('get_data');
+  });
 });
 Route::namespace('blog')->prefix('blog')->name('blog.')->group(function(){
   Route::get('index','dashboardController@index')->name('index');
@@ -93,7 +97,10 @@ Route::namespace('pelukis')->prefix('pelukis')->name('pelukis.')->middleware('ch
     Route::get('index','komisiController@index')->name('index');
   });
 });
+Route::namespace('marketing')->prefix('marketing')->name('marketing.')->middleware('checkrole:marketing')->group(function(){
+  Route::get('home','dahsboardController@home')->name('home');
 
+});
 Route::namespace('pemilik')->prefix('pemilik')->name('pemilik.')->middleware('checkrole:pemilik')->group(function(){
   Route::get('index','HomeController@index')->name('index');
   Route::prefix('admin')->name('admin.')->group(function(){

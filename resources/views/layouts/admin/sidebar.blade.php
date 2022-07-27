@@ -67,14 +67,14 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#colapsePembayaran"
+            aria-expanded="true" aria-controls="colapsePembayaran">
             <i class="fas fa-fw fa-folder"></i>
             <span>Pembayaran</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="colapsePembayaran" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{route('admin.karya.index')}}">List Data</a>
+                <a class="collapse-item" href="{{route('admin.pembayaran.index')}}">List Data</a>
             </div>
         </div>
     </li>

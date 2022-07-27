@@ -10,6 +10,7 @@ class lukisanController extends Controller
     public function lukisan_json(){
       $template = '';
       $get = db::table('tb_gambar')
+      ->whereNull('status')
       ->limit(20)
       ->get();
       foreach ($get as $key => $value) {

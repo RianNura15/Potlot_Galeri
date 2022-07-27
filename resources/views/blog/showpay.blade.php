@@ -33,7 +33,7 @@
 		      toast.addEventListener('mouseleave', Swal.resumeTimer)
 		    }
 		  });
-				 window.snap.pay('{{$token}}', {
+				 window.snap.pay('{{$data['token']}}', {
 					 onSuccess: function(result){
 						  save(result)
 							toastMixin.fire({
@@ -69,7 +69,7 @@
 					 var data = new FormData();
 					 data.append('_token','{{csrf_token()}}');
 					 data.append('data',JSON.stringify(result));
-					 data.append('id_booking','{{$id_cart}}');
+					 data.append('id_booking','{{$data['id_cart']}}');
 					 $.ajax({
 					   url:'{{route('blog.order.status')}}',
 					   type:'post',
