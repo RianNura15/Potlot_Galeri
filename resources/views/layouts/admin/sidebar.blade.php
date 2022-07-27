@@ -16,17 +16,11 @@
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
         </li>
-        <!-- Nav Item - Dashboard -->
-
-        <!-- Divider -->
         <hr class="sidebar-divider">
 
-        <!-- Heading -->
         <div class="sidebar-heading">
           Master Data
         </div>
-
-        <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
           aria-expanded="true" aria-controls="collapseTwo">
@@ -81,9 +75,9 @@
     </a>
     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="{{route('marketing.karya.index')}}">List Data</a>
-        <a class="collapse-item" href="{{route('marketing.karya.tambah_index')}}">Tambah Lukisan</a>
-        <a class="collapse-item" href="{{route('marketing.promo.index')}}">Harga Promo</a>
+        <a class="collapse-item" href="{{route('marketing.gambar.index')}}">List Data</a>
+        <a class="collapse-item" href="{{route('marketing.gambar.tambah_index')}}">Tambah Lukisan</a>
+        <a class="collapse-item" href="{{route('marketing.gambar.promo')}}">Harga Promo</a>
       </div>
     </div>
   </li>
@@ -95,8 +89,8 @@
     </a>
     <div id="colapsePembayaran" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">List Data</a>
-        <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Komisi</a>
+        {{-- <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">List Data</a> --}}
+        {{-- <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Komisi</a> --}}
       </div>
     </div>
   </li>
@@ -108,39 +102,15 @@
   </a>
     <div id="pesananCollapse" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Pesanan</a>
-        <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Revisi</a>
+        {{-- <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Pesanan</a> --}}
+        {{-- <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Revisi</a> --}}
       </div>
     </div>
   </li>
     @endif
-    <!-- Nav Item - Charts -->
-    {{-- <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
-    </li>
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
-    </li> --}}
-
-    <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-
-    <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-
-    <!-- Sidebar Message -->
-    {{-- <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-        <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-        <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-    </div> --}}
 
 </ul>

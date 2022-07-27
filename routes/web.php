@@ -106,26 +106,14 @@ Route::namespace('pemilik')->prefix('pemilik')->name('pemilik.')->middleware('ch
   });
 });
 
-Route::prefix('marketing')->name('marketing.')->middleware('checkrole:anggota')->group(function(){
-  Route::get('home','marketing\dashboardController@home')->name('home');
+Route::namespace('marketing')->prefix('marketing')->name('marketing.')->middleware('checkrole:anggota')->group(function(){
+  Route::get('home','dashboardController@home')->name('home');
 
-  Route::namespace('admin')->prefix('karya')->name('karya.')->group(function(){
-    Route::get('index','karyaController@index')->name('index');
-    Route::get('get_data','karyaController@get_data')->name('get_data');
-    Route::get('tambah_index','karyaController@tambah_index')->name('tambah_index');
-    Route::post('tambah','karyaController@tambah')->name('tambah');
-    Route::post('delete','karyaController@delete')->name('delete');
-    Route::post('tambah_pemasar','karyaController@tambah_pemasar')->name('tambah_pemasar');
-    Route::get('data_karya','karyaController@data_karya')->name('data_karya');
-  });
+  Route::prefix('gambar')->name('gambar.')->group(function(){
+    Route::get('index','gambarController@index')->name('index');
+    Route::get('tambah_index','gambarController@tambah_index')->name('tambah_index');
+    Route::get('promo','gambarController@promo')->name('promo');
 
-  Route::namespace('admin')->prefix('promo')->name('promo.')->group(function(){
-    Route::get('index','promoController@index')->name('index');
-    Route::post('add_promo','promoController@add_promo')->name('add_promo');
-  });
-
-  Route::namespace('admin')->prefix('pembayaran')->name('pembayaran.')->group(function(){
-    Route::get('index','pembayaranController@index')->name('index');
-    Route::get('get_data','pembayaranController@get_data')->name('get_data');
+    Route::get('get_data','gambarController@get_data')->name('get_data');
   });
 });
