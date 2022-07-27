@@ -93,7 +93,7 @@
               name:`{{Auth::user()->name}}`,
               email:`{{Auth::user()->email}}`,
             },success:function(data){
-              window.open('{{route('blog.order.payload')}}?token='+data,'_blank');
+              window.open('{{route('blog.order.payload')}}?token='+data.token+'&id_cart='+data.id_cart,'_blank');
             }
           });
         }

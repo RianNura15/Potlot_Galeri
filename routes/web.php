@@ -71,6 +71,7 @@ Route::namespace('blog')->prefix('blog')->name('blog.')->group(function(){
   Route::prefix('order')->name('order.')->group(function(){
     Route::post('bayar','orderController@bayar')->name('bayar');
     Route::get('payload','orderController@payload')->name('payload');
+    Route::post('status','orderController@status')->name('status');
   });
 
   Route::prefix('custom')->name('custom.')->group(function(){

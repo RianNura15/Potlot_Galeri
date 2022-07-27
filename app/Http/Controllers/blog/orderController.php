@@ -19,6 +19,7 @@ class orderController extends Controller
       \Midtrans\Config::$isSanitized = true;
       \Midtrans\Config::$is3ds = true;
       $id = Str::random(40);
+      $id_cart = $request->id;
       $midtrans = [
           'transaction_details' => [
               'order_id' => $id,
@@ -39,28 +40,26 @@ class orderController extends Controller
         try {
           $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
           $token =  Snap::createTransaction($midtrans)->token;
-          // foreach ($request->product_id as $pid) {
-          //   DB::table('orders')
-          //   ->insert([
-          //     'order_id' => $id,
-          //     'user_id' => Auth::id(),
-          //     'product_id' => $pid,
-          //     'token' => $token,
-          //     // 'status' => 'paid'
-          //   ]);
-          // DB::table('charts')
-          // ->where('product_id',$pid)
-          // ->delete();
-          // }
-          return response()->json($token);
-          // return view('blog.showpay')->with(compact('token'));
+          $data = [
+            'token' => $token,
+            'id_cart' => $id_cart
+          ];
+          return response()->json($data);
       }
       catch (Exception $e) {
-          return response()->json($e->getMessage());
+        return response()->json($e->getMessage());
       }
     }
     public function payload(Request $request){
       $token = $request->token;
-      return view('blog.showpay',compact('token'));
+      $id_cart = $request->id_cart;
+      return view('blog.showpay',compact('token','id_cart'));
+    }
+    public function status(Request $request){
+      $get = db::table('tb_cart')
+      ->where('id',$id_booking)
+      ->first();
+      $data = json_decode($request->data);
+      
     }
 }
