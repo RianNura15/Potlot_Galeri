@@ -10,74 +10,90 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    @if (auth()->user()->role == 'admin')
+      <li class="nav-item active">
         <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+        </li>
+        <!-- Nav Item - Dashboard -->
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+        <!-- Divider -->
+        <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Master Data
-    </div>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+          Master Data
+        </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            <span>User</span>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+          aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <span>User</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{route('admin.user.anggota')}}">Anggota</a>
-                <a class="collapse-item" href="{{route('admin.customer.customer_index')}}">Customer</a>
-                <a class="collapse-item" href="{{route('admin.pelukis.index')}}">Pelukis</a>
-            </div>
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{route('admin.user.anggota')}}">Anggota</a>
+            <a class="collapse-item" href="{{route('admin.customer.customer_index')}}">Customer</a>
+            <a class="collapse-item" href="{{route('admin.pelukis.index')}}">Pelukis</a>
+          </div>
         </div>
-    </li>
+      </li>
 
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <!-- Divider -->
+      <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
+      <!-- Heading -->
+      <div class="sidebar-heading">
         Produk Menu
-    </div>
+      </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Karya</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{route('admin.karya.index')}}">List Data</a>
-                <a class="collapse-item" href="{{route('admin.karya.tambah_index')}}">Tambah Lukisan</a>
-                <a class="collapse-item" href="{{route('admin.promo.index')}}">Harga Promo</a>
-            </div>
+        aria-expanded="true" aria-controls="collapsePages">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>Karya</span>
+      </a>
+      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="{{route('admin.karya.index')}}">List Data</a>
+          <a class="collapse-item" href="{{route('admin.karya.tambah_index')}}">Tambah Lukisan</a>
+          <a class="collapse-item" href="{{route('admin.promo.index')}}">Harga Promo</a>
         </div>
+      </div>
     </li>
+  @elseif (auth()->user()->role == 'anggota')
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#colapsePembayaran"
-            aria-expanded="true" aria-controls="colapsePembayaran">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Pembayaran</span>
-        </a>
-        <div id="colapsePembayaran" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{route('admin.pembayaran.index')}}">List Data</a>
-            </div>
-        </div>
-    </li>
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+      aria-expanded="true" aria-controls="collapsePages">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Karya</span>
+    </a>
+    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{{route('marketing.karya.index')}}">List Data</a>
+        <a class="collapse-item" href="{{route('marketing.karya.tambah_index')}}">Tambah Lukisan</a>
+        <a class="collapse-item" href="{{route('marketing.promo.index')}}">Harga Promo</a>
+      </div>
+    </div>
+  </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#colapsePembayaran"
+      aria-expanded="true" aria-controls="colapsePembayaran">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Pembayaran</span>
+    </a>
+    <div id="colapsePembayaran" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">List Data</a>
+      </div>
+    </div>
+  </li>
+    @endif
     <!-- Nav Item - Charts -->
     {{-- <li class="nav-item">
         <a class="nav-link" href="charts.html">
