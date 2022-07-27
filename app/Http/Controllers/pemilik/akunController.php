@@ -14,6 +14,12 @@ class akunController extends Controller
   public function admin(){
     return view('pemilik.akun.admin');
   }
+  public function anggota(){
+    return view('pemilik.akun.marketing');
+  }
+  public function customer(){
+    return view('pemilik.akun.customer');
+  }
   public function get_data_admin(Request $request){
     $limit = is_null($request["length"]) ? 10 : $request["length"];
     $offset = is_null($request["start"]) ? 0 : $request["start"];

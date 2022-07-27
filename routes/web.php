@@ -102,6 +102,9 @@ Route::namespace('pemilik')->prefix('pemilik')->name('pemilik.')->middleware('ch
   Route::get('index','HomeController@index')->name('index');
   Route::prefix('akun')->name('akun.')->group(function(){
     Route::get('admin','akunController@admin')->name('admin');
+    Route::get('anggota','akunController@anggota')->name('anggota');
+    Route::get('customer','akunController@customer')->name('customer');
+
     Route::get('get_data_admin','akunController@get_data_admin')->name('get_data_admin');
     Route::post('insert_admin','akunController@insert_admin')->name('insert_admin');
     Route::get('show','akunController@show')->name('show');
