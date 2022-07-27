@@ -44,4 +44,31 @@ class gambarController extends Controller
     $recordsFiltered = is_null($get_count) ? 0 : $get_count;
     return response()->json(compact("data", "draw", "recordsTotal", "recordsFiltered"));
   }
+  public function tambah_index(){
+    return view('marketing.gambar.tambah');
+  }
+  public function tambah(Request $request){
+    $request->validate([
+      'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+    try {
+      $imageName = time().'.'.$request->file->extension();
+      $request->file->move(public_path('images'), $imageName);
+      $insert = db::table('tb_gambar')
+      ->insertGetId([
+        'gambar' => $imageName,
+        'nama' => $request->nama,
+        'keterangan' => $request->keterangan,
+        'harga' => $request->harga
+      ]);
+      db::table('tb_pemasar')
+      ->insert([
+        'id_gambar' => $insert,
+        'id_anggota' => $request->id_pemasar
+      ]);
+      return response()->json('berhasil',200);
+    } catch (\Exception $e) {
+      return response()->json($e->getMessage());
+    }
+  }
 }

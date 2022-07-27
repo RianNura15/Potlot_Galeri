@@ -122,5 +122,6 @@ Route::namespace('marketing')->prefix('marketing')->name('marketing.')->middlewa
     Route::get('promo','gambarController@promo')->name('promo');
 
     Route::get('get_data','gambarController@get_data')->name('get_data');
+    Route::post('tambah','gambarController@tambah')->name('tambah');
   });
 });
