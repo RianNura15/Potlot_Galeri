@@ -66,7 +66,18 @@
             </div>
         </div>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Pembayaran</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{route('admin.karya.index')}}">List Data</a>
+            </div>
+        </div>
+    </li>
     <!-- Nav Item - Charts -->
     {{-- <li class="nav-item">
         <a class="nav-link" href="charts.html">

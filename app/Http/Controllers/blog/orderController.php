@@ -57,9 +57,33 @@ class orderController extends Controller
     }
     public function status(Request $request){
       $get = db::table('tb_cart')
-      ->where('id',$id_booking)
+      ->where('id',$request->id_booking)
       ->first();
       $data = json_decode($request->data);
-      
+      db::beginTransaction();
+      try {
+        $tb_order = db::table('tb_order')
+        ->insert([
+          'tb_gambar_id' => $get->id_karya,
+          'users_id' => $get->id_user,
+          'status' => 'Lunas'
+        ]);
+        db::table('tb_cart')
+        ->where('id',$request->id_booking)
+        ->delete();
+        $insert = db::table('tb_payment')
+        ->insert([
+          'payment_type' => $data->payment_type,
+          'status_message' => $data->status_message,
+          'transaction_status' => $data->transaction_status,
+          'transaction_time' => $data->transaction_time,
+          'tb_order_id' => $tb_order,
+        ]);
+        db::commit();
+        return response()->json('berhasil');
+      } catch (\Exception $e) {
+        return response()->json($e->getMessage());
+      }
+
     }
 }

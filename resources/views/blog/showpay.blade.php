@@ -48,7 +48,7 @@
 							 title: 'Menunggu Pembayaran'
 						 });
 						 setTimeout(function() {
-							 window.location.href = "";
+							 window.location.href = "{{route('blog.keranjang.index')}}";
 						 }, 3000);
 					 },
 					 onError: function(result){
@@ -58,11 +58,11 @@
 							title: 'Gagal melakukan pembayaran'
 						});
 						setTimeout(function() {
-							window.location.href = "";
+							window.location.href = "{{route('blog.keranjang.index')}}";
 						}, 3000);
 					 },
 					 onClose: function(){
-						 window.location.href = "";
+						 window.location.href = "{{route('blog.keranjang.index')}}";
 					 }
 				 })
 				 function save(result){
@@ -78,7 +78,7 @@
 					   data:data,
 					   success:function(data){
 					      setTimeout(function() {
-					        window.location.href = "";
+					        window.location.href = "{{route('blog.keranjang.index')}}";
 					      }, 3000);
 					   },error:function(data){
 					     toastMixin.fire({

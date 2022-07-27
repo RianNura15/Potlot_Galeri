@@ -3,20 +3,6 @@
 
 @section('content')
   <!-- ======= Breadcrumbs ======= -->
-  <section id="breadcrumbs" class="breadcrumbs">
-    <div class="container">
-
-      <div class="d-flex justify-content-between align-items-center">
-        <h2> </h2>
-        <ol>
-          <li><a href="{{url('/')}}">Home</a></li>
-          <li>Keranjang</li>
-        </ol>
-      </div>
-
-    </div>
-  </section><!-- End Breadcrumbs -->
-
   <!-- ======= Portfolio Details Section ======= -->
   <section id="portfolio-details" class="portfolio-details">
     <div class="container">
@@ -93,7 +79,7 @@
               name:`{{Auth::user()->name}}`,
               email:`{{Auth::user()->email}}`,
             },success:function(data){
-              window.open('{{route('blog.order.payload')}}?token='+data.token+'&id_cart='+data.id_cart,'_blank');
+              window.open('{{route('blog.order.payload')}}?token='+data.token+'&id_cart='+data.id_cart);
             }
           });
         }
