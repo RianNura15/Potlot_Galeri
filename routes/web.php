@@ -107,7 +107,7 @@ Route::namespace('pemilik')->prefix('pemilik')->name('pemilik.')->middleware('ch
 });
 
 Route::prefix('marketing')->name('marketing.')->middleware('checkrole:anggota')->group(function(){
-  Route::namespace('marketing')->get('home','dashboardController@home')->name('home');
+  Route::get('home','marketing\dashboardController@home')->name('home');
 
   Route::namespace('admin')->prefix('karya')->name('karya.')->group(function(){
     Route::get('index','karyaController@index')->name('index');

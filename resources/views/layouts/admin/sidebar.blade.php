@@ -67,6 +67,12 @@
       </div>
     </li>
   @elseif (auth()->user()->role == 'anggota')
+    <li class="nav-item active">
+      <a class="nav-link" href="index.html">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span></a>
+      </li>
+      <hr class="sidebar-divider">
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
       aria-expanded="true" aria-controls="collapsePages">
@@ -90,6 +96,20 @@
     <div id="colapsePembayaran" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">List Data</a>
+        <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Komisi</a>
+      </div>
+    </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pesananCollapse"
+    aria-expanded="true" aria-controls="pesananCollapse">
+    <i class="fas fa-fw fa-folder"></i>
+    <span>Custom</span>
+  </a>
+    <div id="pesananCollapse" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Pesanan</a>
+        <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Revisi</a>
       </div>
     </div>
   </li>
