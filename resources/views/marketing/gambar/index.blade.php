@@ -100,8 +100,7 @@
         { data: null,
           render: function ( data, type, row ) {
           return '<div class="btn-group" role="group" aria-label="Basic example">'+
-                    '<button onclick="tambah_pemasar('+data.id+')" class="btn btn-sm btn-info"><i class="fa fa-folder-open-o" aria-hidden="true"></i>Pemasar</button>'+
-                    '<button class="btn btn-sm btn-danger" onclick="hapus('+data.id+')"> Hapus</button>'+
+                    '<button onclick="tambah_pemasar('+data.id+')" class="btn btn-sm btn-info"><i class="fa fa-folder-open-o" aria-hidden="true"></i>View Gambar</button>'+
                   '</div>';
         }},
       ]

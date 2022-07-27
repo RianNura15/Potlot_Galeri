@@ -100,9 +100,13 @@ Route::namespace('pelukis')->prefix('pelukis')->name('pelukis.')->middleware('ch
 
 Route::namespace('pemilik')->prefix('pemilik')->name('pemilik.')->middleware('checkrole:pemilik')->group(function(){
   Route::get('index','HomeController@index')->name('index');
-  Route::prefix('admin')->name('admin.')->group(function(){
-    Route::get('index','adminController@index')->name('index');
-    Route::get('get_data','adminController@get_data')->name('get_data');
+  Route::prefix('akun')->name('akun.')->group(function(){
+    Route::get('admin','akunController@admin')->name('admin');
+    Route::get('get_data_admin','akunController@get_data_admin')->name('get_data_admin');
+    Route::post('insert_admin','akunController@insert_admin')->name('insert_admin');
+    Route::get('show','akunController@show')->name('show');
+    Route::post('update','akunController@update')->name('update');
+    Route::post('hapus','akunController@hapus')->name('hapus');
   });
 });
 
