@@ -70,7 +70,7 @@
         },success:function(data){
           Toast.fire({
             icon: 'success',
-            title: 'Daftar kerangjang dihapus',
+            title: 'Daftar custom dihapus',
           });
           setTimeout(function(){
             location.reload();

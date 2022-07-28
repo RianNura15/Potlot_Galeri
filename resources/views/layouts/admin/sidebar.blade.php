@@ -59,7 +59,7 @@
         </div>
       </div>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#transaksiCollapse"
       aria-expanded="true" aria-controls="transaksiCollapse">
       <i class="fa fa-exchange" aria-hidden="true"></i>
@@ -70,7 +70,7 @@
         <a class="collapse-item" href="{{route('admin.user.anggota')}}">Penjualan</a>
       </div>
     </div>
-    </li>
+    </li> --}}
   @elseif (auth()->user()->role == 'anggota')
     <li class="nav-item active">
       <a class="nav-link" href="index.html">
@@ -104,7 +104,7 @@
       </div>
     </div>
   </li>
-  <li class="nav-item">
+  {{-- <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pesananCollapse"
     aria-expanded="true" aria-controls="pesananCollapse">
     <i class="fas fa-fw fa-folder"></i>
@@ -112,11 +112,11 @@
   </a>
     <div id="pesananCollapse" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        {{-- <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Pesanan</a> --}}
-        {{-- <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Revisi</a> --}}
+        <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Pesanan</a>
+        <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Revisi</a>
       </div>
     </div>
-  </li>
+  </li> --}}
     @endif
     <hr class="sidebar-divider d-none d-md-block">
     <div class="text-center d-none d-md-inline">

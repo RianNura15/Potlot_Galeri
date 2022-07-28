@@ -32,6 +32,14 @@ class customController extends Controller
       return view('blog.custom.data_list',compact('get'));
     }
     public function batal(Request $request){
-      
+      try {
+        db::table('tb_custom')
+        ->where('id',$request->id)
+        ->delete();
+        return response()->json('berhasil');
+      } catch (\Exception $e) {
+        return response()->json($e->getMessage());
+      }
+
     }
 }

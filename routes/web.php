@@ -119,6 +119,12 @@ Route::namespace('pemilik')->prefix('pemilik')->name('pemilik.')->middleware('ch
     Route::get('index','transaksiController@index')->name('index');
     Route::get('get_data','transaksiController@get_data')->name('get_data');
   });
+
+  Route::prefix('custom')->name('custom.')->group(function(){
+    Route::get('index','customController@index')->name('index');
+    Route::get('get_data','customController@get_data')->name('get_data');
+    
+  });
 });
 
 Route::namespace('marketing')->prefix('marketing')->name('marketing.')->middleware('checkrole:anggota')->group(function(){
