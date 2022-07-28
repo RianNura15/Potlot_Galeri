@@ -126,4 +126,9 @@ Route::namespace('marketing')->prefix('marketing')->name('marketing.')->middlewa
     Route::post('tambah','gambarController@tambah')->name('tambah');
     Route::get('data_karya','gambarController@data_karya')->name('data_karya');
   });
+
+  Route::prefix('transaksi')->name('transaksi.')->group(function(){
+    Route::get('index','transaksiController@index')->name('index');
+    Route::get('get_data','transaksiController@get_data')->name('get_data');
+  });
 });

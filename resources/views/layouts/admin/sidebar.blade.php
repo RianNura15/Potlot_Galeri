@@ -96,12 +96,11 @@
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#colapsePembayaran"
       aria-expanded="true" aria-controls="colapsePembayaran">
       <i class="fas fa-fw fa-folder"></i>
-      <span>Pembayaran</span>
+      <span>Transaksi</span>
     </a>
     <div id="colapsePembayaran" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        {{-- <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">List Data</a> --}}
-        {{-- <a class="collapse-item" href="{{route('marketing.pembayaran.index')}}">Komisi</a> --}}
+        <a class="collapse-item" href="{{route('marketing.transaksi.index')}}">List Data</a>
       </div>
     </div>
   </li>
