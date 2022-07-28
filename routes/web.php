@@ -80,6 +80,9 @@ Route::namespace('blog')->prefix('blog')->name('blog.')->group(function(){
 
   Route::prefix('custom')->name('custom.')->group(function(){
     Route::get('index','customController@index')->name('index');
+    Route::post('create','customController@create')->name('create');
+    Route::get('data_list','customController@data_list')->name('data_list');
+    Route::post('batal','customController@batal')->name('batal');
   });
 });
 
@@ -135,8 +138,8 @@ Route::namespace('marketing')->prefix('marketing')->name('marketing.')->middlewa
   Route::prefix('transaksi')->name('transaksi.')->group(function(){
     Route::get('index','transaksiController@index')->name('index');
     Route::get('get_data','transaksiController@get_data')->name('get_data');
-
     Route::post('verifikasi','transaksiController@verifikasi')->name('verifikasi');
-
   });
+
+
 });

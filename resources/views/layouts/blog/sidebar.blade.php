@@ -18,7 +18,7 @@
         <div class="collapse" id="form-elements">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"><a class="nav-link" href="{{route('blog.custom.index')}}">Pesan Ke Pelukis</a></li>
-            <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Draf Pesanan</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{route('blog.custom.data_list')}}">Draf Pesanan</a></li>
           </ul>
         </div>
       </li>

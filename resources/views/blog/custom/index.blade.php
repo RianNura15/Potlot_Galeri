@@ -3,9 +3,21 @@
 @section('content')
     <div class="col-lg-12">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body shadow">
+          <p>Custom Gambar</p>
+          <hr>
           <form id="form_custom">
-            
+            @csrf
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Keterangan Custom</label>
+              <textarea name="keterangan" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="custom-file mb-5">
+              <input type="file" name="gambar" class="custom-file-input" id="customFile">
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <input type="hidden" name="id_users" value="{{auth()->user()->id}}">
+            <button type="submit" class="btn btn-success" name="button">Custom</button>
           </form>
         </div>
       </div>
@@ -13,6 +25,10 @@
 @endsection
 @push('script')
 <script type="text/javascript">
+$('input[type="file"]').change(function(e){
+       var fileName = e.target.files[0].name;
+       $('.custom-file-label').html(fileName);
+   });
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -24,33 +40,24 @@ const Toast = Swal.mixin({
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   })
-  @auth
-  function tambah_keranjang(id){
+  $('#form_custom').on('submit',function(e){
+    e.preventDefault();
+    var formdata = new FormData(this)
     $.ajax({
-      url:'{{route('blog.keranjang.tambah')}}',
+      url:'{{route('blog.custom.create')}}',
       type:'post',
-      data:{
-        '_token':'{{csrf_token()}}',
-        id:id,
-        user:{{Auth::user()->id}}
-      },success:function(data){
+      processData:false,
+      contentType:false,
+      data:formdata,
+      success:function(data){
         Toast.fire({
           icon: 'success',
-          title: 'Berhasil menambah keranjang',
-          text: "akan berpindah halaman",
+          title: 'Berhasil mengirimkan custom',
         });
-        setTimeout(function(){
-          window.location.href = '{{route('blog.keranjang.index')}}'
-        }, 3000);
-      },error:function(data){
-        Toast.fire({
-          icon: 'error',
-          title: data.responseJSON,
-        });
+        document.getElementById('form_custom').reset();
       }
     })
-  }
-  @endauth
+  })
   @guest
     function tambah_keranjang(id){
       Toast.fire({
