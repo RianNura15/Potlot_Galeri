@@ -111,6 +111,11 @@ Route::namespace('pemilik')->prefix('pemilik')->name('pemilik.')->middleware('ch
     Route::post('update','akunController@update')->name('update');
     Route::post('hapus','akunController@hapus')->name('hapus');
   });
+
+  Route::prefix('transaksi')->name('transaksi.')->group(function(){
+    Route::get('index','transaksiController@index')->name('index');
+    Route::get('get_data','transaksiController@get_data')->name('get_data');
+  });
 });
 
 Route::namespace('marketing')->prefix('marketing')->name('marketing.')->middleware('checkrole:anggota')->group(function(){
@@ -131,6 +136,7 @@ Route::namespace('marketing')->prefix('marketing')->name('marketing.')->middlewa
     Route::get('index','transaksiController@index')->name('index');
     Route::get('get_data','transaksiController@get_data')->name('get_data');
 
-    Route::get('index_kirim','transaksiController@index_kirim')->name('index_kirim');
+    Route::post('verifikasi','transaksiController@verifikasi')->name('verifikasi');
+
   });
 });

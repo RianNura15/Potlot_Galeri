@@ -41,7 +41,11 @@
             </div>
         </div>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('pemilik.transaksi.index')}}">
+            <i class="fa fa-money"></i>
+            <span>Transaksi</span></a>
+    </li>
     <!-- Nav Item - Utilities Collapse Menu -->
     <!-- Divider -->
 

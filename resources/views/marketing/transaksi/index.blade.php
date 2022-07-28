@@ -1,4 +1,4 @@
-@extends('layouts.pemilik.app')
+@extends('layouts.admin.app')
 
 @section('content')
 <div class="container">
@@ -19,6 +19,7 @@
                           <th>Total</th>
                           <th>status</th>
                           <th>Tanggal</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                     </table>
@@ -66,8 +67,28 @@
         {data: "harga"},
         {data: "status"},
         {data: "tanggal"},
+        {data: null,
+          render:function(data){
+            if (data.flag != 'verif') {
+              return '<button class="btn btn-success" onclick="verif('+data.id+')">Verifikasi</button>'
+            }
+            return '';
+          }
+        },
       ]
     });
+    function verif(id){
+      $.ajax({
+        url:'{{route('marketing.transaksi.verifikasi')}}',
+        type:'post',
+        data:{
+          '_token':'{{csrf_token()}}',
+          id:id
+        },success:function(data){
+          $('.table').DataTable().ajax.reload();
+        }
+      });
+    }
     function detail(id){
       $.ajax({
         url:'{{route('pemilik.akun.show')}}',

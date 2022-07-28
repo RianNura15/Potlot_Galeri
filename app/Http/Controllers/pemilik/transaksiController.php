@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\marketing;
+namespace App\Http\Controllers\pemilik;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use DB, Response;
 class transaksiController extends Controller
 {
     public function index(){
-      return view('marketing.transaksi.index');
+      return view('pemilik.transaksi.index');
     }
     public function get_data(Request $request){
       $limit = is_null($request["length"]) ? 10 : $request["length"];
@@ -18,11 +18,10 @@ class transaksiController extends Controller
       $data = [];
       $result = DB::table('tb_order AS a')
       ->select('a.*','c.name','p.harga','p.nama','d.transaction_time','d.payment_type','d.status_message')
-      ->leftJoin('tb_pemasar AS b','a.tb_gambar_id','b.id_gambar')
       ->leftJoin('users AS c','c.id','a.users_id')
       ->leftjoin('tb_gambar AS p','p.id','a.tb_gambar_id')
       ->leftJoin('tb_payment AS d','d.tb_order_id','a.id')
-      ->where('b.id_anggota',$request->user_id);
+      ->where('a.flag','verif');
       if (!empty($search)) {
         $result = $result->where('c.name','LIKE','%'.$search.'%')
         ->orwhere('p.nama','LIKE','%'.$search.'%');
@@ -48,18 +47,5 @@ class transaksiController extends Controller
       $recordsTotal = is_null($get_count) ? 0 : $get_count;
       $recordsFiltered = is_null($get_count) ? 0 : $get_count;
       return response()->json(compact("data", "draw", "recordsTotal", "recordsFiltered"));
-    }
-    public function verifikasi(Request $request){
-      try {
-        db::table('tb_order')
-        ->where('id',$request->id)
-        ->update([
-          'flag'=>'verif'
-        ]);
-        return response()->json('berhasil');
-      } catch (\Exception $e) {
-        return response()->json($e->getMessage());
-      }
-
     }
 }
