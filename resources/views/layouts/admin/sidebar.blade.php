@@ -101,6 +101,7 @@
     <div id="colapsePembayaran" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item" href="{{route('marketing.transaksi.index')}}">List Data</a>
+        <a class="collapse-item" href="{{route('marketing.transaksi.index_kirim')}}">Kirim Laporan Transaksi</a>
       </div>
     </div>
   </li>

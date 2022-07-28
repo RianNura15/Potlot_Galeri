@@ -19,6 +19,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style media="screen">
+      .bg-register-image{
+        background-image: url('https://arthive.net/res/media/img/orig/article/c2e/7567110@2x.jpg');
+      }
+    </style>
 </head>
 <body>
     <div id="app">

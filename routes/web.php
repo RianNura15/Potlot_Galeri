@@ -130,5 +130,7 @@ Route::namespace('marketing')->prefix('marketing')->name('marketing.')->middlewa
   Route::prefix('transaksi')->name('transaksi.')->group(function(){
     Route::get('index','transaksiController@index')->name('index');
     Route::get('get_data','transaksiController@get_data')->name('get_data');
+
+    Route::get('index_kirim','transaksiController@index_kirim')->name('index_kirim');
   });
 });
