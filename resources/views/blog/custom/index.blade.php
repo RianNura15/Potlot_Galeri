@@ -1,70 +1,95 @@
 @extends('layouts.blog.app')
 
 @section('content')
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-body shadow">
-          <p>Custom Gambar</p>
-          <hr>
-          <form id="form_custom">
-            @csrf
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Keterangan Custom</label>
-              <textarea name="keterangan" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <div class="custom-file mb-5">
-              <input type="file" name="gambar" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Choose file</label>
-            </div>
-            <input type="hidden" name="id_users" value="{{auth()->user()->id}}">
-            <button type="submit" class="btn btn-success" name="button">Custom</button>
-          </form>
-        </div>
-      </div>
+<section id="portfolio-details" class="portfolio-details">
+  <div class="container-fluid">
+    <div class="row justify-content-center card">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Nama Gambar</th>
+            <th>Harga</th>
+            <th>Sampel</th>
+            <th>Nama Marketing</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @php
+          $num = 1;
+          @endphp
+          @forelse ($get as $key => $value)
+          <tr>
+            <td>{{$num++}}</td>
+            <td>{{$value->nama}}</td>
+            <td>{{rupiah($value->harga)}}</td>
+            <td><img class="img-fluid img-thumbnail" src="{{asset('public\custom')}}\{{$value->sampel}}" style="height: 100px; width: 100px" alt=""></td>
+            <td>{{$value->name}}</td>
+            <td>{{$value->status}}</td>
+            <td>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                @if($value->status=='pesan')
+                <button type="button" onclick="bayar({{$value->id}})" class="btn btn-success">Bayar</button>
+                @endif
+                <a href="{{url('blog/custom/chat',$value->id)}}" class="btn btn-primary">Chat</a>
+                <!-- <button onclick="batal({{$value->id}})" type="button" class="btn btn-danger">Batalkan</button> -->
+              </div>
+            </td>
+          </tr>
+          @empty
+          <tr>
+            <td class="text-center" colspan="6">Data Kosong</td>
+          </tr>
+          @endforelse
+        </tbody>
+      </table>
     </div>
+  </div>
+</section>
 @endsection
-@push('script')
+
+@push('scripting')
 <script type="text/javascript">
-$('input[type="file"]').change(function(e){
-       var fileName = e.target.files[0].name;
-       $('.custom-file-label').html(fileName);
-   });
-const Toast = Swal.mixin({
+  $('.table').DataTable();
+  const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
     didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
-  $('#form_custom').on('submit',function(e){
-    e.preventDefault();
-    var formdata = new FormData(this)
+     toast.addEventListener('mouseenter', Swal.stopTimer)
+     toast.addEventListener('mouseleave', Swal.resumeTimer)
+   }
+ })
+
+  function bayar(id){
     $.ajax({
-      url:'{{route('blog.custom.create')}}',
-      type:'post',
-      processData:false,
-      contentType:false,
-      data:formdata,
-      success:function(data){
-        Toast.fire({
-          icon: 'success',
-          title: 'Berhasil mengirimkan custom',
+      url:'{{route('blog.custom.cart_id')}}',
+      type:'get',
+      data:{
+        id:id
+      },success:function(data){
+        // console.log(data)
+        $.ajax({
+          url:'{{route('blog.custom.bayar')}}',
+          type:'post',
+          data:{
+            '_token':'{{csrf_token()}}',
+            id:data.id,
+            gross_amount:data.harga,
+            // gross_amount:1,
+            name:`{{Auth::user()->name}}`,
+            email:`{{Auth::user()->email}}`,
+          },success:function(data){
+            window.open('{{route('blog.custom.payload')}}?token='+data.token+'&id_cart='+data.id_cart);
+          }
         });
-        document.getElementById('form_custom').reset();
       }
     })
-  })
-  @guest
-    function tambah_keranjang(id){
-      Toast.fire({
-        icon: 'error',
-        title: 'Login terlebih dahulu',
-      });
-    }
-  @endguest
+  }
+
 </script>
 @endpush

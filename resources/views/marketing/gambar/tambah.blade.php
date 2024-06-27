@@ -18,8 +18,7 @@
                       <div class="form-group col-md-6">
                         <label for="inputEmail4">Gambar</label>
                         <div class="custom-file">
-                          <input name="file" type="file" class="custom-file-input" id="customFile">
-                          <label class="custom-file-label" for="customFile">Pilih Gambar</label>
+                          <input name="file" type="file" class="form-control" id="customFile">
                         </div>
                       </div>
                       <div class="form-group col-md-6">
@@ -45,7 +44,7 @@
     </div>
 </div>
 @endsection
-@push('script')
+@push('scripting')
   <script type="text/javascript">
   const Toast = Swal.mixin({
       toast: true,
@@ -90,7 +89,6 @@
           }
       });
       e.preventDefault();
-
  });
 
   </script>

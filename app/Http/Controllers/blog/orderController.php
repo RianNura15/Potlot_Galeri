@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class orderController extends Controller
 {
     public function bayar(Request $request){
-      \Midtrans\Config::$serverKey = 'Mid-server-UZNFle0pQNFWNiVlZcgos_59';
+      \Midtrans\Config::$serverKey = 'Mid-server-YhEcCIto7B4efBHoSLtkICdN';
       \Midtrans\Config::$isProduction = true;
       \Midtrans\Config::$isSanitized = true;
       \Midtrans\Config::$is3ds = true;
@@ -64,28 +64,30 @@ class orderController extends Controller
       $data = json_decode($request->data);
       db::beginTransaction();
       try {
-        $tb_order = db::table('tb_order')
-        ->insertGetId([
-          'tb_gambar_id' => $get->id_karya,
-          'users_id' => $get->id_user,
-          'status' => 'Lunas'
-        ]);
+        // $tb_order = db::table('tb_order')
+        // ->insertGetId([
+        //   'tb_gambar_id' => $get->id_karya,
+        //   'users_id' => $get->id_user,
+        //   'status' => 'Lunas'
+        // ]);
         db::table('tb_cart')
         ->where('id',$request->id_booking)
-        ->delete();
-        $insert = db::table('tb_payment')
-        ->insert([
-          'payment_type' => $data->payment_type,
-          'status_message' => $data->status_message,
-          'transaction_status' => $data->transaction_status,
-          'transaction_time' => $data->transaction_time,
-          'tb_order_id' => $tb_order,
-        ]);
-        db::table('tb_gambar')
-        ->where('id',$get->id_karya)
         ->update([
-          'status' => 'dibeli'
+          'status' => 'dibayar',
         ]);
+        // $insert = db::table('tb_payment')
+        // ->insert([
+        //   'payment_type' => $data->payment_type,
+        //   'status_message' => $data->status_message,
+        //   'transaction_status' => $data->transaction_status,
+        //   'transaction_time' => $data->transaction_time,
+        //   'tb_order_id' => $tb_order,
+        // ]);
+        // db::table('tb_gambar')
+        // ->where('id',$get->id_karya)
+        // ->update([
+        //   'status' => 'dibeli'
+        // ]);
         db::commit();
         return response()->json('berhasil');
       } catch (\Exception $e) {

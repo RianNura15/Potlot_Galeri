@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Hash;
+use Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -37,30 +40,35 @@ class LoginController extends Controller
     {
       $this->middleware('guest')->except('logout');
     }
+    
     public function login(Request $request)
     {
-        $input = $request->all();
+      // dd(Hash::make('admin'));
+      $input = $request->all();
 
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+      $this->validate($request, [
+        'email' => 'required|email',
+        'password' => 'required',
+      ]);
 
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
-            if (auth()->user()->role == 'admin') {
-                return redirect()->route('admin.home');
-            }elseif (auth()->user()->role == 'customer') {
-              return redirect()->route('blog.index');
-            }elseif (auth()->user()->role == 'anggota') {
-              return redirect()->route('marketing.home');
-            }elseif (auth()->user()->role == 'pemilik') {
-              return redirect()->route('pemilik.index');
-            }
-        }else{
-            return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+      if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'], 'verif'=>'login')))
+      {
+        // dd(Hash::make('pemilik'));
+        if (auth()->user()->role == 'pemilik') {
+          return redirect()->route('pemilik.home');
+        }elseif (auth()->user()->role == 'admin') {
+          return redirect()->route('admin.home');
+        }elseif (auth()->user()->role == 'customer') {
+          Auth::logout();
+        }elseif (auth()->user()->role == 'anggota') {
+          return redirect()->route('marketing.home');
+        }elseif (auth()->user()->role == 'pemilik') {
+          return redirect()->route('pemilik.index');
         }
+      }else{
+        return redirect()->route('login')
+        ->with('error','Email-Address And Password Are Wrong.');
+      }
 
     }
-}
+  }

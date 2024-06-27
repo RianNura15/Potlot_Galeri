@@ -6,8 +6,13 @@
     </button>
 
     <ul class="navbar-nav ml-auto">
-
-
+        @if(auth()->user()->role == 'anggota')
+        <li class="nav-item dropdown no-arrow mx-1">
+            <span class="nav-link">
+                <span class="mr-2 d-none d-lg-inline text-dark gray-600 small">Kode Referal : {{auth()->user()->koderef_mark}}</span>
+            </span>
+        </li>
+        @endif
         <div class="topbar-divider d-none d-sm-block"></div>
 
         <!-- Nav Item - User Information -->
