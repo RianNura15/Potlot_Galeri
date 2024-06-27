@@ -208,7 +208,7 @@ class customController extends Controller
 
   public function bayar(Request $request)
   {
-    \Midtrans\Config::$serverKey = 'Mid-server-YhEcCIto7B4efBHoSLtkICdN';
+    \Midtrans\Config::$serverKey = '';
     \Midtrans\Config::$isProduction = true;
     \Midtrans\Config::$isSanitized = true;
     \Midtrans\Config::$is3ds = true;
