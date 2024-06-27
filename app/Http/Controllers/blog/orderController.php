@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class orderController extends Controller
 {
     public function bayar(Request $request){
-      \Midtrans\Config::$serverKey = '';
+      \Midtrans\Config::$serverKey = 'Mid-server-YhEcCIto7B4efBHoSLtkICdN';
       \Midtrans\Config::$isProduction = true;
       \Midtrans\Config::$isSanitized = true;
       \Midtrans\Config::$is3ds = true;
